@@ -11,8 +11,7 @@ Version: 1.0.0
 import datetime
 import hashlib
 import json
-from flask import Flask
-import jsonify
+
 
 class Blockchain:
     
