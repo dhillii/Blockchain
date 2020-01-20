@@ -7,9 +7,8 @@ Version: 1.0.0
 @author: davidhill
 """
 
-from flask import Flask
-import jsonify
-from blockchain.py import Blockchain
+from flask import Flask, jsonify
+from blockchain import Blockchain
 
 
 # Initialize web app
@@ -39,9 +38,27 @@ def get_chain():
     response = {'chain': blockchain.chain,
                 'chain_length': len(blockchain.chain)}
     return jsonify(response), 200
+
+@app.route('/test', methods=['GET'])
+def test():
+    return 200
+
+@app.route('/is_valid', methods=['GET'])
+def is_valid():
+    if blockchain.is_valid(blockchain.chain):
+        response = {'message': 'The blockchain is valid!'}
+        return jsonify(response), 200
+    
+    else:
+        response = {'message': 'The blockchain is NOT valid...'}
+        return jsonify(response), 200
+
+    
+    
     
 
-
+# Run app
+app.run(host='0.0.0.0', port=5000)
 
 
 
